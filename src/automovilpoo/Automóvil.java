@@ -1,7 +1,4 @@
 package automovilpoo;
-
-import java.text.DecimalFormat;
-
 /***********************************************
 * Automóvil.java
 * Yellsmy Toj
@@ -48,7 +45,8 @@ public class Automóvil
     *@paramcolor define el color del vehículo
     *@paramvelocidadActual define la velocidad que tiene el vehículo en un momento exacto
     */
-    public Automóvil (String marca, int modelo, String motor, String tipoCombustible, String tipoAutomovil, char nPuertas, char nAsientos, int velocidadMax, String color, int velocidadActual  )
+    public Automóvil (String marca, int modelo, String motor, String tipoCombustible,String tipoAutomovil,
+            char nPuertas, char nAsientos, int velocidadMax, String color, int velocidadActual  )
     {
         this.marca=marca;
         this.modelo=modelo;

@@ -2,7 +2,8 @@ package automovilpoo;
 
 import java.text.DecimalFormat;
 import java.util.Scanner;
-import Animacion.Dibujo;
+import Animacion.Dibujo; // Se importa la clase Dibujo del paquete Animación
+
 /***********************************************
 * AutomovilPoo.java
 * Yellsmy Toj
