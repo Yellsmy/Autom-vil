@@ -1,7 +1,8 @@
 package automovilpoo;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
-
+import Animacion.Dibujo;
 /***********************************************
 * AutomovilPoo.java
 * Yellsmy Toj
@@ -21,9 +22,12 @@ public class AutomovilPoo
     // según la opción deseada
     void menú()
     {   
+        
+        Dibujo animacionCarro= new Dibujo();
         boolean salir = false;
         int seleccion;
         int capturaIngresoDato;
+        clase.mostrarDatos(); // Mostramos los datos del carro
         while (!salir)
         {
             System.out.println("|---------------------BIENVENIDO--------------------|");
@@ -37,27 +41,16 @@ public class AutomovilPoo
             opción.nextLine();
             switch (seleccion)
             {            
-                // Si seleccionamos la opción 1, se ejecutará el método para agregar datos al árbol 1
+                // Si seleccionamos la opción 1, se ejecutará el método para acelerar
                 case 1:
-                    System.out.println("Ingrese la velocidad a acelerar: ");
-                    capturaIngresoDato = opción.nextInt();
-                    if (clase.getVelocidadActual() > clase.getVelocidadMax())
-                    {
-                        System.out.println("Lo sentimos, la velocidad a la que quieres acelerar sobrepasa la \n capacidad máxima");                   
-                    }
-                    else
-                    {
-                        clase.acelerar(capturaIngresoDato);
-                        System.out.println("Has acelerado ");
-                        System.out.println("Tu velocidad actual es "+clase.getVelocidadActual()+" km/h");
-                        System.out.println("────▄▄▄▄▄▄──────");
-                        System.out.println("─▄▄██┌┐█┌┐█▄▄▄▄─");
-                        System.out.println("─██████████████─");
-                        System.out.println("─▀▀◯▀▀▀▀▀▀▀▀◯▀─");
-                    }                 
+                    System.out.println("Ingrese la velocidad a acelerar: ");                   
+                    clase.acelerar(opción.nextInt());
+                    System.out.println("Has acelerado ");
+                    System.out.println("Tu velocidad actual es "+clase.getVelocidadActual()+" km/h");
+                    animacionCarro.animAcelerar();                                
                     break;
 
-                // Si seleccionamos la opción 2, se ejecutará el método para agregar datos al árbol 2
+                // Si seleccionamos la opción 2, se ejecutará el método para desacelerar
                 case 2:
                     System.out.println("Ingrese cuánto desea desacelerar: ");
                     capturaIngresoDato = opción.nextInt();
@@ -65,34 +58,44 @@ public class AutomovilPoo
                     {
                         System.out.println("La cantidad que desea desacelerar es inválida");
                         System.out.println("Recuerda no puedes desacelerar cantidades menores a cero");
-                    }
+                    }  // end if
                     else
                     {
                         clase.desacelerar(capturaIngresoDato);
                         System.out.println("Has desacelerado");
                         System.out.println("Tu velocidad actual es "+clase.getVelocidadActual()+" km/h");
-                    }                   
+                        animacionCarro.animDesacelerar();
+                    }  // end else                  
                     break;           
 
-                // Al ingresar el número 3, primero se consultará que los árboles no estén vacíos
-                // sino se ejecutará el método para comparar los árboles
+                // Al ingresar el número 3, se ejecutará el método para frenar
                 case 3:
                     clase.frenar();
                     System.out.println("Has frenado");
                     System.out.println("Tu velocidad actual es "+clase.getVelocidadActual()+" km/h");
+                    animacionCarro.animfrenar();
                     break;
 
-                // Si el usuario selecciona la opción 3, se ejecutará el método para calcular el 
+                // Si el usuario selecciona la opción 4, se ejecutará el método para calcular el 
                 // tiempo estimado de llegada de la clase Automóvil
                 case 4:
-                    System.out.println("Ingresa la distancia a rrecorrer en km: ");
-                    capturaIngresoDato = opción.nextInt();
-                    System.out.println("El tiempo estimado de llegada es: "+clase.tiempoEstimadoLlegada(capturaIngresoDato));             
+                    System.out.println("Ingresa la distancia a recorrer en km: ");
+                    
+                    // Almacenamos el resultado del cálculo correspondiente en una variable
+                    float operacion=clase.tiempoEstimadoLlegada(opción.nextInt());
+                    float decimal=operacion%1;  // Calculamos el módulo del resultado
+                    float entero=operacion-decimal;  // Restamos el decimal al recultado
+                    
+                    // De la clase DecimalFormat instanseamos un objeto para que el valor decimal
+                    // Solo tenga 2 decimales
+                    DecimalFormat formatoDecimal = new DecimalFormat("#.00"); 
+                    System.out.println("El tiempo estimado de llegada es: "+(int)entero+" hrs y "+formatoDecimal.format(decimal)+" min");
+                    animacionCarro.animTiempoLlegada();
                     break;
                 case 0:
-                    salir = true;               
+                    System.out.println("---*Gracias por utilizar nuestro servicio*---");
+                    salir = true;           
                     break;
-
                 default:
                     System.out.println("La opción ingresada es incorrecta");          
             }  // end switch

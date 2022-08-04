@@ -1,5 +1,7 @@
 package automovilpoo;
 
+import java.text.DecimalFormat;
+
 /***********************************************
 * Automóvil.java
 * Yellsmy Toj
@@ -89,7 +91,14 @@ public class Automóvil
     // @param aceleracion: Velocidad de aceleración que está tomando el vehículo
     public void acelerar(int aceleracion)
     {
-        velocidadActual += aceleracion;       
+        if ((velocidadActual+aceleracion)>velocidadMax)
+        {
+            System.out.println("Lo sentimos, la velocidad a la que quieres acelerar sobrepasa la \n capacidad máxima");
+        }  // end if
+        else
+        {
+            velocidadActual += aceleracion;
+        }  // end else              
     }
     
     //**************************************************************
@@ -113,9 +122,9 @@ public class Automóvil
     
     // Método para calcular la estimación del tiempo de llegada del usuario
     // @param distanciaRecorrer: Distancian en kilómetros entre la ubicación actual y el lugar de destino
-    public int tiempoEstimadoLlegada (int distanciaRecorrer)
+    public float tiempoEstimadoLlegada (float distanciaRecorrer)
     {
-        return (distanciaRecorrer/velocidadActual);
+        return ((float)distanciaRecorrer/(float)velocidadActual);
     }
     
     //**************************************************************
